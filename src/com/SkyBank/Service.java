@@ -28,6 +28,7 @@ public class Service extends HttpServlet {
 	private static Statement stmt;
 	private String status = "Empty";
 
+	// Hej 
 
 	public void init(ServletConfig config) throws ServletException {
 		String DB_USER = "DTU02";
