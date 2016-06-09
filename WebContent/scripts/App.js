@@ -1,0 +1,1 @@
+var app = angular.module('sbApp', ['ngRoute','sbapi','ui.bootstrap']);
