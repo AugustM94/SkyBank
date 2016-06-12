@@ -8,17 +8,21 @@
 			<attribute name="owner.project.facets" value="jst.web"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/Users/meincke/Downloads/cn/db2jcc_license_cisuz.jar">
+	<classpathentry kind="lib" path="java-json.jar">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/Users/meincke/Downloads/cn/db2jcc.jar">
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="/Users/August/Library/Mobile Documents/com~apple~CloudDocs/DTU filer/fagprojekt/Jars/db2jcc_license_cisuz.jar">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/Home"/>
-	<classpathentry kind="lib" path="java-json.jar"/>
+	<classpathentry kind="lib" path="/Users/August/Library/Mobile Documents/com~apple~CloudDocs/DTU filer/fagprojekt/Jars/db2jcc.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
