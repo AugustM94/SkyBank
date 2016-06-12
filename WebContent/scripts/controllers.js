@@ -35,11 +35,11 @@ angular.module('Home').controller('HomeController',['$scope', '$log', 'SbapiServ
         $scope.toggle = !$scope.toggle;
     };
     
-    $scope.transactions = {};
+    $scope.overview = {};
     $scope.getTransactions = function () {
     	SbapiService.GetTransactionsList(1, function(response) {
-        	$log.debug(response);
-        	 $scope.transactions = response;
+    		$log.debug(response);
+        	$scope.overview = response;
         });
     };
     

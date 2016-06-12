@@ -5,6 +5,8 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -14,7 +16,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 @WebServlet("/MainOverview")
@@ -98,7 +99,34 @@ public class MainOverview extends HttpServlet {
 		
 		JSONArray list = new JSONArray();
 		
+		MainOverviewDto mainOverviewDto = new MainOverviewDto();
+		List<Account> accounts = new ArrayList<Account>();
+
+		Account account1 = new Account();
+		Account account2 = new Account();
+		
+		account1.setBalance(12734);
+		account1.setCard("MasterCard");
+		account1.setId(2);
+		account1.setName("Primary");
+		accounts.add(account1);
+		
+		account2.setBalance(5411);
+		account2.setCard("Visa");
+		account2.setId(4);
+		account2.setName("Budget");
+		accounts.add(account2);
+		
+		mainOverviewDto.setAccounts(accounts);
+		mainOverviewDto.setDeposits(16);
+		mainOverviewDto.setWithdrawels(54);	
+		
+		JSONObject jsonObject = new JSONObject(mainOverviewDto);
+		/*
 		try {
+			
+			
+			
 			JSONObject obj1 = new JSONObject();
 			obj1.put("name", "NEM-KONTO");
 			obj1.put("id", new Integer(1231232765));
@@ -112,10 +140,10 @@ public class MainOverview extends HttpServlet {
 		} catch (JSONException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
-		}
+		}*/
 	      
-	      System.out.println(list.toString());
-	    out.println(list.toString());
+	     System.out.println(jsonObject.toString());
+	    out.println(jsonObject.toString());
 		
 		
 	}
