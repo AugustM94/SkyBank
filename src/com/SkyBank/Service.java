@@ -8,14 +8,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import javax.annotation.Resource;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.sql.DataSource;
 
 /**
  * Servlet implementation class Service
@@ -40,7 +38,7 @@ public class Service extends HttpServlet {
 			stmt = db2Conn.createStatement();
 			status = "Connection found";
 
-		    ResultSet result = stmt.executeQuery("SELECT * FROM DTUGRP01.SAMPLE");
+		    ResultSet result = stmt.executeQuery("SELECT * FROM DTUGRP01.CITY");
 
 		    while(result.next())
 		    {
