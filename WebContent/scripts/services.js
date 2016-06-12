@@ -7,12 +7,12 @@ angular.module('Getters')
     function ($http, $rootScope, $log) {
         var service = {};
         
-        service.GetTransactionsList = function (username, callback) {
+        service.GetTransactionsList = function (userid, callback) {
         	 
         	$http({
-        	    url: "Transactions",
+        	    url: "MainOverview",
         	    method: "POST",
-        	    params: {username:username}
+        	    params: {userid:userid}
         	    })
                 .success(function (response) {
                     callback(response);

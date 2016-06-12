@@ -47,6 +47,9 @@
           </div>
         </div>
         <p><a href="#/login">Logout</a></a></p>
+        <div ng-repeat="transaction in transactions">
+        	{{transaction.name}}
+        </div>
         </div><!-- End Page Content -->
     </div><!-- End Content Wrapper -->
   </div><!-- End Page Wrapper -->
