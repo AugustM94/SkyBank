@@ -62,33 +62,6 @@ public class LoanController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		PrintWriter out = response.getWriter();
-		
-		Account account1 = new Account();
-		account1.setBalance(12734);
-		account1.setCard("MasterCard");
-		account1.setId(2);
-		account1.setName("Primary");
-		
-		List<Transaction> transactions = new ArrayList<Transaction>();
-		TransactionDto transactionDto = new TransactionDto();
-		
-		Transaction dumTransaction = new Transaction();
-		dumTransaction.setAccount(account1);
-		dumTransaction.setAmount(500.);
-		dumTransaction.setType(TransactionType.DEPOSIT);
-		dumTransaction.setDescription("Martin er noob");
-		
-		transactions.add(dumTransaction);
-		transactionDto.setTransactions(transactions);
-		transactionDto.setAccount(account1);
-		
-		JSONObject jsonObject = new JSONObject(transactionDto);
-		
-	    System.out.println(jsonObject.toString());
-	    out.println(jsonObject.toString());		
-	    
 	}
 		
 
@@ -97,33 +70,11 @@ public class LoanController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		PrintWriter out = response.getWriter();
+		String userid = request.getParameter("userid");
+		String amount = request.getParameter("amount");
 		
-		
-		Account account1 = new Account();
-		account1.setBalance(12734);
-		account1.setCard("MasterCard");
-		account1.setId(2);
-		account1.setName("Primary");
-		
-		List<Transaction> transactions = new ArrayList<Transaction>();
-		TransactionDto transactionDto = new TransactionDto();
-		
-		Transaction dumTransaction = new Transaction();
-		dumTransaction.setAccount(account1);
-		dumTransaction.setAmount(500.);
-		dumTransaction.setType(TransactionType.DEPOSIT);
-		dumTransaction.setDescription("Martin er noob");
-		
-		transactions.add(dumTransaction);
-		transactionDto.setTransactions(transactions);
-		transactionDto.setAccount(account1);
-		
-		JSONObject jsonObject = new JSONObject(transactionDto);
-		
-	    System.out.println(jsonObject.toString());
-	    out.println(jsonObject.toString());
-		
+		// Create new loan in database
+		System.out.println("userid: " + userid + ", amount: " + amount);
 		
 	}
 }

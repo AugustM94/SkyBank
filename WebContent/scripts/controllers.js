@@ -36,14 +36,54 @@ angular.module('Home').controller('HomeController',['$scope', '$log', 'SbapiServ
     };
     
     $scope.overview = {};
-    $scope.getTransactions = function () {
-    	SbapiService.GetTransactionsList(1, function(response) {
+    $scope.getMainOverview= function () {
+    	SbapiService.GetMainOverview(1, function(response) {
     		$log.debug(response);
         	$scope.overview = response;
         });
     };
     
-    $scope.getTransactions();
+    $scope.getMainOverview();
+}]);
+
+angular.module('Transactions').controller('TransactionsController',['$scope', '$log', 'SbapiService', function ($scope, $log, SbapiService) {
+
+	$scope.toggleSidebar = function() {
+        $scope.toggle = !$scope.toggle;
+    };
+    
+    $scope.overview = {};
+    $scope.transactions = {};
+    $scope.getTransactionsOverview= function () {
+    	SbapiService.GetTransactionsOverview(1, function(response) {
+    		$log.debug(response);
+        	$scope.overview = response;
+        	$scope.transactions = response.accounts[0].transactions;
+        });
+    };
+    
+    $scope.changeAccount = function (accountIndex) {
+    	$log.debug("changing account to " + accountIndex);
+    	$log.debug($scope.overview.accounts[accountIndex].transactions);
+    	$scope.transactions = $scope.overview.accounts[accountIndex].transactions;
+    }
+    
+    $scope.getTransactionsOverview();
+}]);
+
+angular.module('Transfer').controller('TransferController',['$scope', '$log', 'SbapiService', function ($scope, $log, SbapiService) {
+
+	$scope.toggleSidebar = function() {
+        $scope.toggle = !$scope.toggle;
+    };
+    
+    $scope.transferFunds = function (accountid, receiver, amount) {
+    	SbapiService.TransferFunds(1, accountid, receiver, amount, function(response) {
+    		$log.debug(response);
+        });
+    };
+    
+    
 }]);
 
 

@@ -3,14 +3,8 @@ package com.SkyBank;
 public class Transaction {
 	TransactionType type; 
 	private Double amount;
-	private Account account;
+	private int account;
 	private String description;
-	
-	public Transaction(){
-		this.amount = amount;
-		this.account = account;
-		this.description = description;
-	}
 
 	public TransactionType getType() {
 		return type;
@@ -28,20 +22,20 @@ public class Transaction {
 		this.amount = amount;
 	}
 
-	public Account getAccount() {
-		return account;
-	}
-
-	public void setAccount(Account account) {
-		this.account = account;
-	}
-
 	public String getDescription() {
 		return description;
 	}
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public int getAccount() {
+		return account;
+	}
+
+	public void setAccount(int account) {
+		this.account = account;
 	}
 	
 	

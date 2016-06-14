@@ -41,7 +41,7 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-lg-6 col-md-12 col-xs-12">
+		<div class="col-lg-12 col-md-12 col-xs-12">
 		<h1>Accounts</h1>
 			<div class="table-responsive accounts-table widget-container-main">
 				<table class="table">
@@ -49,20 +49,20 @@
 						<tr><th class="text-center">ID</th><th>Account name</th><th>Card</th><th>Balance</th></tr>
 					</thead>
 					<tbody ng-repeat="account in overview.accounts">
-						<tr ><td class="text-center">{{$index+1}}</td><td>{{account.name}}</td><td>{{account.card}}</td><td>{{account.balance}}</td></tr>
+						<tr ng-click="changeAccount($index)"><td class="text-center">{{$index+1}}</td><td>{{account.name}}</td><td>{{account.card}}</td><td>{{account.balance}}</td></tr>
 					</tbody>
 				</table>
        		</div>
 		</div>
-		<div class="col-lg-6 col-md-12 col-xs-12">
-		<h1>Currencies</h1>
+		<div class="col-lg-12 col-md-12 col-xs-12">
+		<h1>Transactions</h1>
 			<div class="table-responsive accounts-table widget-container-main">
 				<table class="table">
 					<thead class="widget-header">
-						<tr><th>Currency</th><th>ISO</th><th>Value</th></tr>
+						<tr><th class="text-center">No.</th><th>Amount</th><th>Description</th></tr>
 					</thead>
-					<tbody ng-repeat="currency in overview.currencies" >
-						<tr><td>{{currency.name}}</td><td>{{currency.iso}}</td><td>{{currency.value}}</td></tr>
+					<tbody >
+						<tr ng-repeat="transaction in transactions"><td class="text-center">{{$index+1}}</td><td>{{transaction.amount}}</td><td>{{transaction.description}}</td></tr>
 					</tbody>
 				</table>
        		</div>

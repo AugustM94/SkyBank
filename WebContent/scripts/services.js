@@ -7,12 +7,38 @@ angular.module('Getters')
     function ($http, $rootScope, $log) {
         var service = {};
         
-        service.GetTransactionsList = function (userid, callback) {
+        service.GetMainOverview = function (userid, callback) {
         	 
         	$http({
         	    url: "MainOverview",
         	    method: "POST",
         	    params: {userid:userid}
+        	    })
+                .success(function (response) {
+                    callback(response);
+                });
+ 
+        };
+        
+        service.GetTransactionsOverview = function (userid, callback) {
+       	 
+        	$http({
+        	    url: "TransactionView",
+        	    method: "POST",
+        	    params: {userid:userid}
+        	    })
+                .success(function (response) {
+                    callback(response);
+                });
+ 
+        };
+        
+        service.TransferFunds = function (userid, accountid, receiver, amount, callback) {
+          	 
+        	$http({
+        	    url: "TransferView",
+        	    method: "POST",
+        	    params: {userid:userid, accountid:accountid, receiver:accountid, amount:amount}
         	    })
                 .success(function (response) {
                     callback(response);

@@ -5,6 +5,7 @@ import java.util.List;
 
 public class MainOverviewDto {
 	List<Account> accounts;  
+	List<Currency> currencies;  
 	int withdrawels;
 	int deposits;
 	int totalBalance;
@@ -14,6 +15,12 @@ public class MainOverviewDto {
 	}
 	public void setAccounts(List<Account> accounts) {
 		this.accounts = accounts;
+	}
+	public List<Currency> getCurrencies() {
+		return currencies;
+	}
+	public void setCurrencies(List<Currency> currencies) {
+		this.currencies = currencies;
 	}
 	public int getWithdrawels() {
 		return withdrawels;

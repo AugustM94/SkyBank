@@ -4,11 +4,15 @@
 angular.module('Authentication', []);
 angular.module('Getters', []);
 angular.module('Home', []);
+angular.module('Transactions', []);
+angular.module('Transfer', []);
 
 angular.module('BasicHttpAuthExample', [
     'Authentication',
     'Getters',
     'Home',
+    'Transactions',
+    'Transfer',
     'ngRoute',
     'ngCookies'
 ])
@@ -25,8 +29,18 @@ angular.module('BasicHttpAuthExample', [
             controller: 'HomeController',
             templateUrl: 'views/home.jsp'
         })
+        
+        .when('/transfer', {
+        	controller: 'TransferController',
+        	templateUrl: 'views/transfer.jsp'
+        })
+        
+        .when('/transactions', {
+        	controller: 'TransactionsController',
+        	templateUrl: 'views/transactions.jsp'
+        })
 
-        .otherwise({ redirectTo: '/login' });
+        .otherwise({ redirectTo: '/' });
 }])
 
 .run(['$rootScope', '$location', '$cookieStore', '$http',

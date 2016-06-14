@@ -31,7 +31,7 @@ public class MainOverview extends HttpServlet {
 		String DB_USER = "DTU02";
 		String DB_PASSWORD = "FAGP2016";
 		
-		
+		/*
 		try {
 			Class.forName("com.ibm.db2.jcc.DB2Driver");
 			db2Conn = DriverManager.getConnection("jdbc:db2://192.86.32.54:5040/DALLASB:" + "user=" + DB_USER + ";"
@@ -39,15 +39,15 @@ public class MainOverview extends HttpServlet {
 		} catch (SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
 			status = e.getMessage();
-		} 
+		} */
 	}
 
 	public void destroy() {
-		try {
+		/*try {
 			db2Conn.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}
+		}*/
 	}
 	
     /**
@@ -101,6 +101,7 @@ public class MainOverview extends HttpServlet {
 		
 		MainOverviewDto mainOverviewDto = new MainOverviewDto();
 		List<Account> accounts = new ArrayList<Account>();
+		List<Currency> currencies = new ArrayList<Currency>();
 
 		Account account1 = new Account();
 		Account account2 = new Account();
@@ -117,16 +118,29 @@ public class MainOverview extends HttpServlet {
 		account2.setName("Budget");
 		accounts.add(account2);
 		
+		Currency currency1 = new Currency();
+		Currency currency2 = new Currency();
+		
+		currency1.setName("Danish Crown");
+		currency1.setIso("DKK");
+		currency1.setValue(100.00);
+		
+		currency2.setName("US Dollar");
+		currency2.setIso("USD");
+		currency2.setValue(673.23);
+		
+		currencies.add(currency1);
+		currencies.add(currency2);
+		
+		
 		mainOverviewDto.setAccounts(accounts);
+		mainOverviewDto.setCurrencies(currencies);
 		mainOverviewDto.setDeposits(16);
 		mainOverviewDto.setWithdrawels(54);	
 		
 		JSONObject jsonObject = new JSONObject(mainOverviewDto);
 		/*
 		try {
-			
-			
-			
 			JSONObject obj1 = new JSONObject();
 			obj1.put("name", "NEM-KONTO");
 			obj1.put("id", new Integer(1231232765));
