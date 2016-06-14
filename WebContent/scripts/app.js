@@ -4,6 +4,8 @@
 angular.module('Authentication', []);
 angular.module('Getters', []);
 angular.module('Home', []);
+angular.module('User', []);
+angular.module('Newclient', []);
 angular.module('Transactions', []);
 angular.module('Transfer', []);
 
@@ -11,6 +13,8 @@ angular.module('BasicHttpAuthExample', [
     'Authentication',
     'Getters',
     'Home',
+    'User',
+    'Newclient',
     'Transactions',
     'Transfer',
     'ngRoute',
@@ -28,6 +32,16 @@ angular.module('BasicHttpAuthExample', [
         .when('/', {
             controller: 'HomeController',
             templateUrl: 'views/home.jsp'
+        })
+        
+        .when('/user', {
+            controller: 'UserController',
+            templateUrl: 'views/user.jsp'
+        })
+        
+        .when('/newclient', {
+            controller: 'NewClientController',
+            templateUrl: 'views/newclient.jsp'
         })
         
         .when('/transfer', {

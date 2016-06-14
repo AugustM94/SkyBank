@@ -20,6 +20,19 @@ angular.module('Getters')
  
         };
         
+        service.GetUserOverview = function (userid, callback) {
+          	 
+        	$http({
+        	    url: "UserView",
+        	    method: "POST",
+        	    params: {userid:userid}
+        	    })
+                .success(function (response) {
+                    callback(response);
+                });
+ 
+        };
+        
         service.GetTransactionsOverview = function (userid, callback) {
        	 
         	$http({

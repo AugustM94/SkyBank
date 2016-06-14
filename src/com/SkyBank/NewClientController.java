@@ -1,12 +1,9 @@
 package com.SkyBank;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -15,11 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
 @WebServlet("/NewClientView")
-public class NewClientController {
+public class NewClientController extends HttpServlet{
 	private static final long serialVersionUID = 1L;
     
 	private static Connection db2Conn;
@@ -70,19 +64,29 @@ public class NewClientController {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String userid = request.getParameter("userid");
-		String amount = request.getParameter("amount");
+		String username = request.getParameter("username");
+		String password = request.getParameter("password");
+		String firstName = request.getParameter("fname");
+		String lastName = request.getParameter("lname");
+		String phone = request.getParameter("phone");
+		String cprNumber = request.getParameter("cpr");
+		String address = request.getParameter("address");
+		String zipNumber = request.getParameter("zip");
+		String city = request.getParameter("city");
+		String country = request.getParameter("country");
 		
-		// login
-		// username (login)
-		// password (password)
-		// first name, last name
-		// phone
-		// cpr-number
-		// addrese, postnummer, land, city
-		
-		// Create new loan in database
-		System.out.println("userid: " + userid + ", amount: " + amount);
+		System.out.println("create new client: " +
+				", username: " + username +
+				", password: " + password +
+				", firstName: " + firstName +
+				", lastName: " + lastName +
+				", phone: " + phone +
+				", cprNumber: " + cprNumber +
+				", address: " + address +
+				", zipNumber: " + zipNumber +
+				", city: " + city +
+				", country: " + country
+				);
 		
 	}
 }

@@ -86,4 +86,33 @@ angular.module('Transfer').controller('TransferController',['$scope', '$log', 'S
     
 }]);
 
+angular.module('User').controller('UserController',['$scope', '$log', 'SbapiService', function ($scope, $log, SbapiService) {
+
+	$scope.toggleSidebar = function() {
+        $scope.toggle = !$scope.toggle;
+    };
+    
+    $scope.overview = {};
+    
+    $scope.getUserOverview = function () {
+    	SbapiService.GetUserOverview(1, function(response) {
+    		$log.debug(response);
+        	$scope.overview = response;
+        });
+    };
+    
+    $scope.getUserOverview();
+}]);
+
+angular.module('Newclient').controller('NewClientController',['$scope', '$log', 'SbapiService', function ($scope, $log, SbapiService) {
+
+	$scope.toggleSidebar = function() {
+        $scope.toggle = !$scope.toggle;
+    };
+    
+    $scope.overview = {};
+    
+   
+}]);
+
 

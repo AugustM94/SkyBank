@@ -19,7 +19,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 @WebServlet("/MainOverview")
-public class MainOverview extends HttpServlet {
+public class MainOverviewController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     
 	private static Connection db2Conn;
@@ -53,7 +53,7 @@ public class MainOverview extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MainOverview() {
+    public MainOverviewController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -95,9 +95,6 @@ public class MainOverview extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		PrintWriter out = response.getWriter();
-		
-		
-		JSONArray list = new JSONArray();
 		
 		MainOverviewDto mainOverviewDto = new MainOverviewDto();
 		List<Account> accounts = new ArrayList<Account>();
