@@ -85,7 +85,7 @@ public class NewClientController extends HttpServlet{
 		int cpr = Integer.parseInt(request.getParameter("cpr"));
 				
 		
-		ResultSet loginResult = loginDao.getLogin(username);
+		ResultSet loginResult = loginDao.getLoginByUsername(username);
 		ResultSet countryResult = countryDao.getContry(country);
 		ResultSet cityResult = cityDao.getCity(city);
 		ResultSet addressResult = addressDao.getAddress(street, streetNumber);

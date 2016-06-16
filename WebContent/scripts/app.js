@@ -6,6 +6,7 @@ angular.module('Getters', []);
 angular.module('Home', []);
 angular.module('User', []);
 angular.module('Newclient', []);
+angular.module('Manageaccount', []);
 angular.module('Transactions', []);
 angular.module('Transfer', []);
 
@@ -15,6 +16,7 @@ angular.module('BasicHttpAuthExample', [
     'Home',
     'User',
     'Newclient',
+    'Manageaccount',
     'Transactions',
     'Transfer',
     'ngRoute',
@@ -42,6 +44,11 @@ angular.module('BasicHttpAuthExample', [
         .when('/newclient', {
             controller: 'NewClientController',
             templateUrl: 'views/newclient.jsp'
+        })
+        
+        .when('/manageaccount', {
+            controller: 'ManageAccountController',
+            templateUrl: 'views/manageaccount.jsp'
         })
         
         .when('/transfer', {

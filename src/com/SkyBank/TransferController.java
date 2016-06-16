@@ -1,12 +1,8 @@
 package com.SkyBank;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -15,39 +11,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
 @WebServlet("/transfer/create")
 public class TransferController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     
-	private static Connection db2Conn;
-
-	private String status = "";
 	ResultSetConverter resultSetConverter = new ResultSetConverter();
+	TransactionDao transactionDao = new TransactionDao();
+	AccountDao accountDao = new AccountDao();
 	
 	public void init(ServletConfig config) throws ServletException {
-		String DB_USER = "DTU02";
-		String DB_PASSWORD = "FAGP2016";
-		
-		
-		try {
-			Class.forName("com.ibm.db2.jcc.DB2Driver");
-			db2Conn = DriverManager.getConnection("jdbc:db2://192.86.32.54:5040/DALLASB:" + "user=" + DB_USER + ";"
-					+ "password=" + DB_PASSWORD + ";");
-		} catch (SQLException | ClassNotFoundException e) {
-			e.printStackTrace();
-			status = e.getMessage();
-		} 
 	}
 
 	public void destroy() {
-		try {
-			db2Conn.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
 	}
 	
     /**
@@ -71,13 +46,27 @@ public class TransferController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String userid = request.getParameter("userid");
-		String accountid = request.getParameter("accountid");
-		String receiver = request.getParameter("receiver");
-		String amount = request.getParameter("amount");
+		int clientid = Integer.valueOf( request.getParameter("clientid"));
+		int senderRegNumber = Integer.valueOf(request.getParameter("regno"));
+		int senderAccountNumber = Integer.valueOf(request.getParameter("accountno"));
+		double amount = Double.valueOf(request.getParameter("amount"));
+		String description = request.getParameter("description");
+		
+		ResultSet accountReceiver = accountDao.getAccountByRegAndAccount(senderRegNumber, senderAccountNumber);
+		ResultSet accountSender = accountDao.getAccountByClientId(clientid);
+		
+		try {
+			int accountReceiverId = accountReceiver.getInt("ACCOUNT_ID");
+			int accountSenderId = accountSender.getInt("ACCOUNT_ID");
+			transactionDao.insertTransaction(accountSenderId, accountReceiverId, amount, description, "DKK");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		// insert into database
-		System.out.println("userid: " + userid + ", accountid: " + accountid + " , receiver: " + receiver + ", amount: " + amount);
+		
+		//System.out.println("clientid: " + clientid + ", accountid: " + accountid + " , receiver: " + receiver + ", amount: " + amount);
 
 	}
 }

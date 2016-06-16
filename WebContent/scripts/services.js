@@ -33,12 +33,12 @@ angular.module('Getters')
  
         };
         
-        service.GetTransactionsOverview = function (userid, callback) {
+        service.GetTransactionsOverview = function (clientid, callback) {
        	 
         	$http({
         	    url: " transactions/list",
         	    method: "POST",
-        	    params: {userid:userid}
+        	    params: {clientid:clientid}
         	    })
                 .success(function (response) {
                     callback(response);
@@ -52,6 +52,19 @@ angular.module('Getters')
         	    url: "transfer/create",
         	    method: "POST",
         	    params: {userid:userid, accountid:accountid, receiver:accountid, amount:amount}
+        	    })
+                .success(function (response) {
+                    callback(response);
+                });
+ 
+        };
+        
+        service.AddNewAccount = function (clientid, accountname, callback) {
+         	 
+        	$http({
+        	    url: "account/create",
+        	    method: "POST",
+        	    params: {clientid:clientid, accountname:accountname}
         	    })
                 .success(function (response) {
                     callback(response);

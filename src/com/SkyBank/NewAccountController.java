@@ -66,9 +66,10 @@ public class NewAccountController extends HttpServlet{
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		System.out.println("clientid: " + request.getParameter("clientid"));
 		int clientid = Integer.valueOf(request.getParameter("clientid"));
 		String accountName = request.getParameter("accountname");
-
+		System.out.println("new account: " + clientid + " " + accountName);
 		int accountNumber = ThreadLocalRandom.current().nextInt(0, 999999);
 		int regNumber = 1234; 
 		

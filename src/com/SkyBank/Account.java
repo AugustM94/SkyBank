@@ -5,10 +5,10 @@ import java.util.List;
 public class Account {
 	private int id;
 	private String name;
-	private String card;
-	private int balance;
+	private int regNumber;
+	private int accountNumber;
+	private double balance;
 	private List<Transaction> transactions;
-	
 	public int getId() {
 		return id;
 	}
@@ -21,16 +21,22 @@ public class Account {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getCard() {
-		return card;
+	public int getRegNumber() {
+		return regNumber;
 	}
-	public void setCard(String card) {
-		this.card = card;
+	public void setRegNumber(int regNumber) {
+		this.regNumber = regNumber;
 	}
-	public int getBalance() {
+	public int getAccountNumber() {
+		return accountNumber;
+	}
+	public void setAccountNumber(int accountNumber) {
+		this.accountNumber = accountNumber;
+	}
+	public double getBalance() {
 		return balance;
 	}
-	public void setBalance(int balance) {
+	public void setBalance(double balance) {
 		this.balance = balance;
 	}
 	public List<Transaction> getTransactions() {
@@ -39,5 +45,7 @@ public class Account {
 	public void setTransactions(List<Transaction> transactions) {
 		this.transactions = transactions;
 	}
+	
+
 	
 }	

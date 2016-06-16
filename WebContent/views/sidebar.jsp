@@ -10,6 +10,8 @@
 					class="menu-icon fa fa-long-arrow-right"></span></a></li>
 			<li class="sidebar-list"><a href="#/newclient">Add new client<span
 					class="menu-icon fa fa-user-plus"></span></a></li>
+			<li class="sidebar-list"><a href="#/manageaccount">Manage accounts<span
+					class="menu-icon fa fa-credit-card"></span></a></li>
 			<li class="sidebar-list"><a href="#/transactions">Transactions<span
 					class="menu-icon fa fa-table"></span></a></li>
 			<li class="sidebar-list"><a href="#/user">User<span

@@ -104,13 +104,11 @@ public class MainOverviewController extends HttpServlet {
 		Account account2 = new Account();
 		
 		account1.setBalance(12734);
-		account1.setCard("MasterCard");
 		account1.setId(2);
 		account1.setName("Primary");
 		accounts.add(account1);
 		
 		account2.setBalance(5411);
-		account2.setCard("Visa");
 		account2.setId(4);
 		account2.setName("Budget");
 		accounts.add(account2);
