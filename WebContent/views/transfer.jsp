@@ -11,12 +11,20 @@
 			</div>
 		</div>
 	<div class="row">
-			<form novalidate class="simple-form">
-				ReceiverId: <input type="text" ng-model="receiver" /><br /> 
-				Amount: <input type="number" ng-model="amount" /><br /> 
-				<input type="button" ng-click="reset()" value="Reset" /> <input
-					type="submit" ng-click="transferFunds(2,receiver,amount)" value="Save" />
-			</form>
-		</div>
+		<div class="form-group col-lg-6 col-md-6 col-xs-6">
+		<form novalidate class="simple-form">
+					<label for="receiver">Receiver</label>
+					<input type="text" name="receiver" class="form-control" ng-model="receiver" required/><br /> 
+					
+					<label for="amount">Amount</label>
+					<input type="number" name="amount" class="form-control" ng-model="amount" /><br /> 
+
+					<div class="form-actions">
+						<button type="button" ng-click="reset()" class="btn btn-default">Reset</button> 
+						<button type="submit" ng-click="transferFunds(2,receiver,amount)" ng-disabled="form.$invalid" class="btn btn-default">Transfer</button>
+				    </div>
+				</form>
+		</div>	
+	</div>
 </div>
 <!-- End Page Content -->

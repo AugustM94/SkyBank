@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-@WebServlet("/MainOverview")
+@WebServlet("/main/overview")
 public class MainOverviewController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     

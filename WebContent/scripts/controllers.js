@@ -110,9 +110,12 @@ angular.module('Newclient').controller('NewClientController',['$scope', '$log', 
         $scope.toggle = !$scope.toggle;
     };
     
-    $scope.overview = {};
     
-   
+   $scope.addNewClient = function() {
+	   SbapiService.AddNewClient($scope.username, $scope.password, $scope.fname, $scope.lname, $scope.phone, $scope.cpr, $scope.address, $scope.zip, $scope.city, $scope.country, function(response) {
+   		$log.debug(response);
+       });
+   }
 }]);
 
 

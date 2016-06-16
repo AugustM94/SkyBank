@@ -3,6 +3,7 @@ package com.SkyBank;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import javax.servlet.ServletConfig;
@@ -12,13 +13,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/NewClientView")
+@WebServlet("/client/create")
 public class NewClientController extends HttpServlet{
 	private static final long serialVersionUID = 1L;
     
 	private static Connection db2Conn;
 
-	private String status = "";
 	ResultSetConverter resultSetConverter = new ResultSetConverter();
 	
 	public void init(ServletConfig config) throws ServletException {
@@ -32,7 +32,6 @@ public class NewClientController extends HttpServlet{
 					+ "password=" + DB_PASSWORD + ";");
 		} catch (SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
-			status = e.getMessage();
 		} 
 	}
 
@@ -74,6 +73,16 @@ public class NewClientController extends HttpServlet{
 		String zipNumber = request.getParameter("zip");
 		String city = request.getParameter("city");
 		String country = request.getParameter("country");
+		
+		/*
+		String newClientSQL = "";
+		try {
+			PreparedStatement stmt = db2Conn.prepareStatement(newClientSQL);
+			stmt.executeQuery();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
 		
 		System.out.println("create new client: " +
 				", username: " + username +

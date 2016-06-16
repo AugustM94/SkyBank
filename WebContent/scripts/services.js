@@ -10,7 +10,7 @@ angular.module('Getters')
         service.GetMainOverview = function (userid, callback) {
         	 
         	$http({
-        	    url: "MainOverview",
+        	    url: "main/overview",
         	    method: "POST",
         	    params: {userid:userid}
         	    })
@@ -23,7 +23,7 @@ angular.module('Getters')
         service.GetUserOverview = function (userid, callback) {
           	 
         	$http({
-        	    url: "UserView",
+        	    url: "user/overview",
         	    method: "POST",
         	    params: {userid:userid}
         	    })
@@ -36,7 +36,7 @@ angular.module('Getters')
         service.GetTransactionsOverview = function (userid, callback) {
        	 
         	$http({
-        	    url: "TransactionView",
+        	    url: " transactions/list",
         	    method: "POST",
         	    params: {userid:userid}
         	    })
@@ -49,7 +49,7 @@ angular.module('Getters')
         service.TransferFunds = function (userid, accountid, receiver, amount, callback) {
           	 
         	$http({
-        	    url: "TransferView",
+        	    url: "transfer/create",
         	    method: "POST",
         	    params: {userid:userid, accountid:accountid, receiver:accountid, amount:amount}
         	    })
@@ -58,6 +58,26 @@ angular.module('Getters')
                 });
  
         };
+        
+        service.AddNewClient = function (username, password, fname, lname, phone, cpr, address, zip, city, country, callback){
+        	$http({
+        	    url: "client/create",
+        	    method: "POST",
+        	    params: {username:username, 
+        	    	password:password, 
+        	    	fname:fname, 
+        	    	lname:lname,
+        	    	phone:phone, 
+        	    	cpr:cpr, 
+        	    	address:address, 
+        	    	zip:zip, 
+        	    	city:city, 
+        	    	country:country}
+        	    })
+                .success(function (response) {
+                    callback(response);
+                });
+        }
         
         return service;
     }]

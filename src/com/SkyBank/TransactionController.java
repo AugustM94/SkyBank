@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-@WebServlet("/TransactionView")
+@WebServlet("/transactions/list")
 public class TransactionController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     
@@ -129,7 +129,19 @@ public class TransactionController extends HttpServlet {
 		
 		transactionDto.setAccounts(accounts);
 		
+		/*
+		String newClientSQL = "";
+		try {
+			PreparedStatement stmt = db2Conn.prepareStatement(newClientSQL);
+			stmt.executeQuery();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
+		
 		JSONObject jsonObject = new JSONObject(transactionDto);
+		
+		
 		
 	    System.out.println(jsonObject.toString());
 	    out.println(jsonObject.toString());	
