@@ -46,19 +46,22 @@ public class TransferController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int clientid = Integer.valueOf( request.getParameter("clientid"));
+		int accountSenderId = Integer.valueOf(request.getParameter("accountid"));
 		int senderRegNumber = Integer.valueOf(request.getParameter("regno"));
 		int senderAccountNumber = Integer.valueOf(request.getParameter("accountno"));
 		double amount = Double.valueOf(request.getParameter("amount"));
 		String description = request.getParameter("description");
 		
+		ResultSet accountSender = accountDao.getAccount(accountSenderId);
 		ResultSet accountReceiver = accountDao.getAccountByRegAndAccount(senderRegNumber, senderAccountNumber);
-		ResultSet accountSender = accountDao.getAccountByClientId(clientid);
 		
 		try {
-			int accountReceiverId = accountReceiver.getInt("ACCOUNT_ID");
-			int accountSenderId = accountSender.getInt("ACCOUNT_ID");
-			transactionDao.insertTransaction(accountSenderId, accountReceiverId, amount, description, "DKK");
+			double balance = accountSender.getDouble("BALANCE");
+			if (balance - amount > 0.0){
+				int accountReceiverId = accountReceiver.getInt("ACCOUNT_ID");
+				transactionDao.insertTransaction(accountSenderId, accountReceiverId, amount, description, "DKK");
+			}
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

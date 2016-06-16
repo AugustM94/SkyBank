@@ -12,18 +12,31 @@
 		</div>
 	<div class="row">
 		<div class="form-group col-lg-6 col-md-6 col-xs-6">
-		<form novalidate class="simple-form">
-					<label for="receiver">Receiver</label>
-					<input type="text" name="receiver" class="form-control" ng-model="receiver" required/><br /> 
-					
-					<label for="amount">Amount</label>
-					<input type="number" name="amount" class="form-control" ng-model="amount" /><br /> 
+			<form class="simple-form">
+				
+				
+				<label for="account"> Single select: </label><br>
+			    <select class="btn btn-default dropdown-toggle" name="accountid" ng-model="accountid">
+			     	<option ng-repeat="account in accounts" value="{{account.id}}">{{account.name}}</option>
+			    </select><br>
+    
+				<label for="regno">Receiver Reg. No.</label>
+				<input type="text" name="regno" class="form-control" ng-model="regno" required/><br /> 
+				
+				<label for="accountno">Receiver Account. No.</label>
+				<input type="text" name="accountno" class="form-control" ng-model="accountno" required/><br /> 
+				
+				<label for="amount">Amount</label>
+				<input type="number" name="amount" class="form-control" ng-model="amount" /><br /> 
 
-					<div class="form-actions">
-						<button type="button" ng-click="reset()" class="btn btn-default">Reset</button> 
-						<button type="submit" ng-click="transferFunds(2,receiver,amount)" ng-disabled="form.$invalid" class="btn btn-default">Transfer</button>
-				    </div>
-				</form>
+				<label for="description">Description</label>
+				<input type="text" name="description" class="form-control" ng-model="description" required/><br /> 
+				
+				<div class="form-actions">
+					<button type="button" ng-click="reset()" class="btn btn-default">Reset</button> 
+					<button type="submit" ng-click="transferFunds()" ng-disabled="form.$invalid" class="btn btn-default">Transfer</button>
+			    </div>
+			</form>
 		</div>	
 	</div>
 </div>

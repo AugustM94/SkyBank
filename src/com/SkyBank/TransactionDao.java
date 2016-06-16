@@ -35,12 +35,15 @@ public class TransactionDao {
 				+ "(ACCOUNT_ID, AMOUNT, CURRENCY_ID, TRANSACTION_TYPE, DESCRIPTION) VALUES"
 				+ "(?,?,?,?,?)";
 		
+		String updateAccountBalance = "UPDATE DTUGRP01.ACCOUNT SET BALANCE = ? WHERE (ACCOUNT_ID) = (?)";
+		String receiverBalance = "SELECT * FROM DTUGRP01.ACCOUNT WHERE (ACCOUNT_ID) = (?)";
+		
 		try {
 			Class.forName("com.ibm.db2.jcc.DB2Driver");
 			Connection db2Conn = DriverManager.getConnection("jdbc:db2://192.86.32.54:5040/DALLASB:" + "user=" + DB_USER + ";"
 					+ "password=" + DB_PASSWORD + ";");
 			
-			PreparedStatement stmt =  db2Conn.prepareStatement(SQL);
+			PreparedStatement stmt = db2Conn.prepareStatement(SQL);
 			stmt.setInt(1, account1);
 			stmt.setDouble(2, amount);
 			stmt.setString(3, currency);
@@ -48,13 +51,18 @@ public class TransactionDao {
 			stmt.setString(5, description);
 			stmt.executeUpdate();
 			
-			PreparedStatement stmt2 =  db2Conn.prepareStatement(SQL);
+			PreparedStatement stmt2 = db2Conn.prepareStatement(SQL);
 			stmt2.setInt(1, account1);
 			stmt2.setDouble(2, amount);
 			stmt2.setString(3, currency);
 			stmt2.setInt(4, TransactionType.DEPOSIT.hashCode());
 			stmt2.setString(5, description);
 			stmt2.executeUpdate();
+			
+			PreparedStatement stmt3 = db2Conn.prepareStatement(updateAccountBalance);
+			stmt3.setDouble(1, account1);
+			stmt3.setDouble(2, amount);
+			stmt3.executeUpdate();
 			return true;
 		} catch (SQLException | ClassNotFoundException e) {
 			e.printStackTrace();

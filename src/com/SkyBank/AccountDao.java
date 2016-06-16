@@ -7,6 +7,27 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class AccountDao {
+	public ResultSet getAccount(int accountId){
+		ResultSet accountResult = null;
+		
+		String DB_USER = "DTU02";
+		String DB_PASSWORD = "FAGP2016";
+		String SQL = "SELECT * FROM DTUGRP01.ACCOUNT WHERE (ACCOUNT_ID) = (?)";
+		
+		try {
+			Class.forName("com.ibm.db2.jcc.DB2Driver");
+			Connection db2Conn = DriverManager.getConnection("jdbc:db2://192.86.32.54:5040/DALLASB:" + "user=" + DB_USER + ";"
+					+ "password=" + DB_PASSWORD + ";");
+			
+			PreparedStatement stmt =  db2Conn.prepareStatement(SQL);
+			stmt.setInt(1, accountId);
+			accountResult = stmt.executeQuery();
+		} catch (SQLException | ClassNotFoundException e) {
+			e.printStackTrace();
+		} 
+		return accountResult;
+	}
+	
 	public ResultSet getAccountByClientId(int clientId){
 		ResultSet accountResult = null;
 		

@@ -46,12 +46,25 @@ angular.module('Getters')
  
         };
         
-        service.TransferFunds = function (userid, accountid, receiver, amount, callback) {
+        service.GetTransferOverview = function (clientid, callback) {
+         	 
+        	$http({
+        	    url: "transfer/list",
+        	    method: "POST",
+        	    params: {clientid:clientid}
+        	    })
+                .success(function (response) {
+                    callback(response);
+                });
+ 
+        };
+        
+        service.TransferFunds = function (accountid, regno, accountno, amount, description, callback) {
           	 
         	$http({
         	    url: "transfer/create",
         	    method: "POST",
-        	    params: {userid:userid, accountid:accountid, receiver:accountid, amount:amount}
+        	    params: {accountid:accountid, regno:regno, accountno:accountno, amount:amount, description:description}
         	    })
                 .success(function (response) {
                     callback(response);

@@ -9,8 +9,8 @@ app.controller('MyCtrl', function ($scope, $http, $log, $location) {
     };
 });*/
 
-angular.module('Authentication').controller('LoginController', ['$scope', '$rootScope', '$location', 'AuthenticationService','$log',
-function ($scope, $rootScope, $location, AuthenticationService, $log) {
+angular.module('Authentication').controller('LoginController', ['$scope', '$rootScope', '$cookieStore','$location', 'AuthenticationService','$log',
+function ($scope, $rootScope, $cookieStore, $location, AuthenticationService, $log) {
     // reset login status
     AuthenticationService.ClearCredentials();
   
@@ -20,6 +20,9 @@ function ($scope, $rootScope, $location, AuthenticationService, $log) {
         	$log.debug(response.success);
         	if(response.success) {
                 AuthenticationService.SetCredentials($scope.username, $scope.password);
+                
+
+                $cookieStore.put('clientid', response.clientId);
                 $rootScope.clientId = response.clientId;
                 $rootScope.username = response.username;
                 $location.path('/');
@@ -31,7 +34,8 @@ function ($scope, $rootScope, $location, AuthenticationService, $log) {
     };
 }]);
 
-angular.module('Home').controller('HomeController',['$scope', '$rootScope', '$log', 'SbapiService', function ($scope, $rootScope, $log, SbapiService) {
+angular.module('Home').controller('HomeController',['$scope', '$rootScope', '$cookieStore','$log', 'SbapiService', function ($scope, $rootScope, $cookieStore, $log, SbapiService) {
+	$rootScope.clientId = $cookieStore.get('clientid');
 	$log.debug("clientid:" + $rootScope.clientId);
 	$scope.toggleSidebar = function() {
         $scope.toggle = !$scope.toggle;
@@ -48,7 +52,8 @@ angular.module('Home').controller('HomeController',['$scope', '$rootScope', '$lo
     $scope.getMainOverview();
 }]);
 
-angular.module('Transactions').controller('TransactionsController',['$scope', '$rootScope', '$log', 'SbapiService', function ($scope, $rootScope, $log, SbapiService) {
+angular.module('Transactions').controller('TransactionsController',['$scope', '$rootScope', '$cookieStore', '$log', 'SbapiService', function ($scope, $rootScope, $cookieStore, $log, SbapiService) {
+	$rootScope.clientId = $cookieStore.get('clientid');
 	$log.debug("clientid:" + $rootScope.clientId);
 	
 	$scope.toggleSidebar = function() {
@@ -74,23 +79,37 @@ angular.module('Transactions').controller('TransactionsController',['$scope', '$
     $scope.getTransactionsOverview();
 }]);
 
-angular.module('Transfer').controller('TransferController',['$scope', '$rootScope', '$log', 'SbapiService', function ($scope, $rootScope, $log, SbapiService) {
+angular.module('Transfer').controller('TransferController',['$scope', '$rootScope', '$cookieStore', '$log', 'SbapiService', function ($scope, $rootScope, $cookieStore, $log, SbapiService) {
+	$rootScope.clientId = $cookieStore.get('clientid');
 	$log.debug("clientid:" + $rootScope.clientId);
+	
 	$scope.toggleSidebar = function() {
         $scope.toggle = !$scope.toggle;
     };
     
-    $scope.transferFunds = function (accountid, receiver, amount) {
-    	SbapiService.TransferFunds(1, accountid, receiver, amount, function(response) {
+    $scope.accounts = {};
+    $scope.transferFunds = function () {
+    	SbapiService.TransferFunds($scope.accountid, $scope.regno, $scope.accountno, $scope.amount, $scope.description, function(response) {
     		$log.debug(response);
         });
     };
     
+    $scope.GetTransferOverview = function () {
+    	SbapiService.GetTransferOverview($rootScope.clientId, function(response) {
+    		$scope.accounts = response.accounts;
+    		$log.debug(response.accounts);
+        });
+    };
+    
+    $scope.GetTransferOverview();
+    
     
 }]);
 
-angular.module('User').controller('UserController',['$scope', '$rootScope', '$log', 'SbapiService', function ($scope, $rootScope, $log, SbapiService) {
+angular.module('User').controller('UserController',['$scope', '$rootScope', '$cookieStore', '$log', 'SbapiService', function ($scope, $rootScope, $cookieStore, $log, SbapiService) {
+	$rootScope.clientId = $cookieStore.get('clientid');
 	$log.debug("clientid:" + $rootScope.clientId);
+	
 	$scope.toggleSidebar = function() {
         $scope.toggle = !$scope.toggle;
     };
@@ -107,8 +126,10 @@ angular.module('User').controller('UserController',['$scope', '$rootScope', '$lo
     $scope.getUserOverview();
 }]);
 
-angular.module('Newclient').controller('NewClientController',['$scope', '$rootScope', '$log', 'SbapiService', function ($scope, $rootScope, $log, SbapiService) {
+angular.module('Newclient').controller('NewClientController',['$scope', '$rootScope', '$cookieStore', '$log', 'SbapiService', function ($scope, $rootScope, $cookieStore, $log, SbapiService) {
+	$rootScope.clientId = $cookieStore.get('clientid');
 	$log.debug("clientid:" + $rootScope.clientId);
+	
 	$scope.toggleSidebar = function() {
         $scope.toggle = !$scope.toggle;
     };
@@ -121,8 +142,10 @@ angular.module('Newclient').controller('NewClientController',['$scope', '$rootSc
    } 
 }]);
 
-angular.module('Manageaccount').controller('ManageAccountController',['$scope', '$rootScope', '$log', 'SbapiService', function ($scope, $rootScope, $log, SbapiService) {
-	$log.debug("clientid: " + $rootScope.clientId);
+angular.module('Manageaccount').controller('ManageAccountController',['$scope', '$rootScope', '$cookieStore', '$log', 'SbapiService', function ($scope, $rootScope, $cookieStore, $log, SbapiService) {
+	$rootScope.clientId = $cookieStore.get('clientid');
+	$log.debug("clientid:" + $rootScope.clientId);
+	
 	$scope.toggleSidebar = function() {
         $scope.toggle = !$scope.toggle;
     };

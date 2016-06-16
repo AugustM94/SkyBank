@@ -64,8 +64,8 @@ angular.module('BasicHttpAuthExample', [
         .otherwise({ redirectTo: '/' });
 }])
 
-.run(['$rootScope', '$location', '$cookieStore', '$http',
-    function ($rootScope, $location, $cookieStore, $http) {
+.run(['$rootScope', '$location', '$cookies','$cookieStore', '$http',
+    function ($rootScope, $location, $cookies, $cookieStore, $http) {
         // keep user logged in after page refresh
         $rootScope.globals = $cookieStore.get('globals') || {};
         if ($rootScope.globals.currentUser) {
