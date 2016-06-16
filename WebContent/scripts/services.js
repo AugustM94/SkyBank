@@ -59,7 +59,7 @@ angular.module('Getters')
  
         };
         
-        service.AddNewClient = function (username, password, fname, lname, phone, cpr, address, zip, city, country, callback){
+        service.AddNewClient = function (username, password, fname, lname, phone, cpr, street, streetno, zip, city, country, callback){
         	$http({
         	    url: "client/create",
         	    method: "POST",
@@ -69,7 +69,8 @@ angular.module('Getters')
         	    	lname:lname,
         	    	phone:phone, 
         	    	cpr:cpr, 
-        	    	address:address, 
+        	    	street:street, 
+        	    	streetno:streetno,
         	    	zip:zip, 
         	    	city:city, 
         	    	country:country}
@@ -93,7 +94,7 @@ angular.module('Authentication')
         service.Login = function (username, password, callback) {
  
         	$http({
-        	    url: "Login",
+        	    url: "login",
         	    method: "POST",
         	    params: {username:username,password:password}
         	    })

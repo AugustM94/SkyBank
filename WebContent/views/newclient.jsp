@@ -36,8 +36,11 @@
 					<label for="cpr">Cpr-number</label>
 					<input type="number" name="cpr" class="form-control" ng-model="cpr" required/><br />
 					 
-					<label for="address">Address</label>
-					<input type="text" name="address" class="form-control" ng-model="address" required/><br /> 
+					<label for="street">Street name</label>
+					<input type="text" name="street" class="form-control" ng-model="street" required/><br /> 
+					
+					<label for="streetno">Street number</label>
+					<input type="text" name="streetno" class="form-control" ng-model="streetno" required/><br /> 
 					
 					<label for="zip">ZIP-code</label>
 					<input type="number" name="zip" class="form-control" ng-model="zip" required/><br /> 

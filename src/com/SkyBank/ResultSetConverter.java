@@ -71,4 +71,15 @@ public class ResultSetConverter {
 
     return json;
   }
+  
+  public boolean isResultSetEmpty(ResultSet resultSet){
+	  /**
+	   * Return true if empty
+	   */
+	 try {
+		return !((resultSet != null) ? resultSet.next() : false);
+	} catch (SQLException e) {
+		return true;
+	}
+  }
 }

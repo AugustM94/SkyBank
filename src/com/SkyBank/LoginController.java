@@ -16,8 +16,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-@WebServlet("/Login")
-public class Login extends HttpServlet {
+@WebServlet("/login")
+public class LoginController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	private static Connection db2Conn;
@@ -51,7 +51,7 @@ public class Login extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Login() {
+    public LoginController() {
         super();
         // TODO Auto-generated constructor stub
     }
