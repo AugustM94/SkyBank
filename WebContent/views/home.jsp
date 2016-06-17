@@ -59,10 +59,10 @@
 			<div class="table-responsive accounts-table widget-container-main">
 				<table class="table">
 					<thead class="widget-header">
-						<tr><th>Currency</th><th>ISO</th><th>Value</th></tr>
+						<tr><th>ISO</th><th>Value</th></tr>
 					</thead>
 					<tbody ng-repeat="currency in overview.currencies" >
-						<tr><td>{{currency.name}}</td><td>{{currency.iso}}</td><td>{{currency.value}}</td></tr>
+						<tr><td>{{currency.name}}</td><td>{{currency.value}}</td></tr>
 					</tbody>
 				</table>
        		</div>

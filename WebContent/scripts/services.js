@@ -7,12 +7,12 @@ angular.module('Getters')
     function ($http, $rootScope, $log) {
         var service = {};
         
-        service.GetMainOverview = function (userid, callback) {
+        service.GetMainOverview = function (clientid, callback) {
         	 
         	$http({
         	    url: "main/overview",
         	    method: "POST",
-        	    params: {userid:userid}
+        	    params: {clientid:clientid}
         	    })
                 .success(function (response) {
                     callback(response);
@@ -20,12 +20,12 @@ angular.module('Getters')
  
         };
         
-        service.GetUserOverview = function (userid, callback) {
+        service.GetUserOverview = function (clientid, callback) {
           	 
         	$http({
         	    url: "user/overview",
         	    method: "POST",
-        	    params: {userid:userid}
+        	    params: {clientid:clientid}
         	    })
                 .success(function (response) {
                     callback(response);

@@ -51,15 +51,19 @@ public class TransferController extends HttpServlet {
 		int senderAccountNumber = Integer.valueOf(request.getParameter("accountno"));
 		double amount = Double.valueOf(request.getParameter("amount"));
 		String description = request.getParameter("description");
-		
+		System.out.println("reg: " + senderRegNumber + " acc no: " + senderAccountNumber);
 		ResultSet accountSender = accountDao.getAccount(accountSenderId);
 		ResultSet accountReceiver = accountDao.getAccountByRegAndAccount(senderRegNumber, senderAccountNumber);
 		
 		try {
+			accountSender.next();
 			double balance = accountSender.getDouble("BALANCE");
 			if (balance - amount > 0.0){
-				int accountReceiverId = accountReceiver.getInt("ACCOUNT_ID");
-				transactionDao.insertTransaction(accountSenderId, accountReceiverId, amount, description, "DKK");
+				if(!resultSetConverter.isResultSetEmpty(accountReceiver)){
+					int accountReceiverId = accountReceiver.getInt("ACCOUNT_ID");
+					transactionDao.insertTransaction(accountSenderId, accountReceiverId, amount, description, "DKK");
+				}
+				
 			}
 			
 		} catch (SQLException e) {

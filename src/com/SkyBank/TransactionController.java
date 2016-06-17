@@ -80,10 +80,10 @@ public class TransactionController extends HttpServlet {
 					transaction.setAccount(transactionResult.getInt("ACCOUNT_ID"));
 					transaction.setAmount(transactionResult.getDouble("AMOUNT"));
 					transaction.setDescription(transactionResult.getString("DESCRIPTION"));
-					transaction.setType(TransactionType.valueOf(transactionResult.getString("TRANSACTION_TYPE")));
+					transaction.setType(TransactionType.values()[transactionResult.getInt("TRANSACTION_TYPE")]);
 					transactions.add(transaction);
 				}
-				account.setTransactions(null);
+				account.setTransactions(transactions);
 				accounts.add(account);
 			}
 		} catch (SQLException e) {

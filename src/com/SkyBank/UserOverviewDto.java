@@ -4,7 +4,7 @@ public class UserOverviewDto {
 	String username;
 	String firstName;
 	String lastName;
-	String phone;
+	Integer phone;
 	Address	address;
 	Currency currency;
 	double interestRate;
@@ -27,10 +27,10 @@ public class UserOverviewDto {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	public String getPhone() {
+	public Integer getPhone() {
 		return phone;
 	}
-	public void setPhone(String phone) {
+	public void setPhone(Integer phone) {
 		this.phone = phone;
 	}
 	public Address getAddress() {

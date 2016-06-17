@@ -2,8 +2,7 @@ package com.SkyBank;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.servlet.ServletConfig;
@@ -13,36 +12,25 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 @WebServlet("/user/overview")
 public class UserOverviewController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	private static Connection db2Conn;
-
+	ClientDao clientDao = new ClientDao();
+	AddressDao addressDao = new AddressDao();
+	CityDao cityDao = new CityDao();
+	CountryDao countryDao = new CountryDao();
+	
 	ResultSetConverter resultSetConverter = new ResultSetConverter();
 
 	public void init(ServletConfig config) throws ServletException {
-		String DB_USER = "DTU02";
-		String DB_PASSWORD = "FAGP2016";
-
-		try {
-			Class.forName("com.ibm.db2.jcc.DB2Driver");
-			db2Conn = DriverManager.getConnection("jdbc:db2://192.86.32.54:5040/DALLASB:" + "user=" + DB_USER + ";"
-					+ "password=" + DB_PASSWORD + ";");
-		} catch (SQLException | ClassNotFoundException e) {
-			e.printStackTrace();
-		}
+		
 	}
 
 	public void destroy() {
-		try {
-			db2Conn.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		
 	}
 
 	    public UserOverviewController() {
@@ -56,32 +44,44 @@ public class UserOverviewController extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-PrintWriter out = response.getWriter();
-		
-		
-		JSONArray list = new JSONArray();
-		
+		PrintWriter out = response.getWriter();
+
+		int clientId = Integer.valueOf(request.getParameter("clientid"));
 		UserOverviewDto userOverviewDto = new UserOverviewDto();
 		
+		
+		
 		Address address = new Address();
-		address.setAddress("Akademivej 100B, st, 115");
-		address.setCity("Kongens Lygnby");
-		address.setCountry("Denmark");
-		address.setZip("2800");
+		try {
+			ResultSet clientResult = clientDao.getClientById(clientId);
+			clientResult.next();
+			ResultSet AddressResult = addressDao.getAddressById(clientResult.getInt("ADDRESS_ID"));
+			AddressResult.next();
+			ResultSet cityResult = cityDao.getCityById(AddressResult.getInt("CITY_ID"));
+			cityResult.next();
+			address.setAddress(AddressResult.getString("STREET_NAME") + " " + AddressResult.getString("STREET_NO"));
+			address.setCity(cityResult.getString("CITY_NAME"));
+			address.setCountry(cityResult.getString("COUNTRY"));
+			address.setZip(cityResult.getString("POSTAL_CODE"));
+			
+			userOverviewDto.setFirstName(clientResult.getString("FIRST_NAME"));
+			userOverviewDto.setLastName(clientResult.getString("LAST_NAME"));
+			userOverviewDto.setPhone(clientResult.getInt("PHONE"));
+			userOverviewDto.setUsername(clientResult.getString("USER_NAME"));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		userOverviewDto.setAddress(address);
 		
 		Currency currency = new Currency();
 		currency.setId(0);
-		currency.setIso("DKK");
-		currency.setName("Danish Crown");
+		currency.setName("DKK");
 		currency.setValue(100.0);
 		userOverviewDto.setCurrency(currency);
 		
-		userOverviewDto.setFirstName("Martin");
-		userOverviewDto.setLastName("Champ");
-		userOverviewDto.setInterestRate(0.5);
-		userOverviewDto.setPhone("12345678");
-		userOverviewDto.setUsername("Martin");
+		
 		
 		JSONObject jsonObject = new JSONObject(userOverviewDto);
 	      
